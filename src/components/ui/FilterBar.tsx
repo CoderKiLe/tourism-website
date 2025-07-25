@@ -188,7 +188,7 @@ const FilterBar = ({
                 </button>
               </span>
             ))}
-            
+
             {activeFilters.categories?.map((category) => (
               <span
                 key={category}

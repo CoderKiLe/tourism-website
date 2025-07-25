@@ -1,0 +1,44 @@
+[
+  {
+    "imageSrc": "https://images.unsplash.com/photo-1665730594190-239a65004ef3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "altText": "Sacred Sites",
+    "title": "Sacred Sites",
+    "linkText": "Explore Monasteries",
+    "linkHref": "/destinations?category=Spiritual"
+  },
+  {
+    "imageSrc": "https://th.bing.com/th/id/R.adbb0138cf2910b89b6e861ab3858ccb?rik=mM2IWfNH26Rx2A&pid=ImgRaw&r=0",
+    "altText": "Himalayan Treks",
+    "title": "Himalayan Treks",
+    "linkText": "Discover Trails",
+    "linkHref": "/destinations?category=Adventure"
+  },
+  {
+    "imageSrc": "https://th.bing.com/th/id/OIP.ssXfbg_MBXyZ-4DKkEBE8gHaEK?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
+    "altText": "Cultural Festivals",
+    "title": "Cultural Festivals",
+    "linkText": "Experience Tshechus",
+    "linkHref": "/destinations?category=Cultural"
+  },
+  {
+    "imageSrc": "https://tse1.mm.bing.net/th/id/OIP.EpfUmnZ55K04uUYO1C-KjwHaEo?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "altText": "Mountain Passes",
+    "title": "Mountain Passes",
+    "linkText": "View Landscapes",
+    "linkHref": "/destinations?category=Mountain"
+  },
+  {
+    "imageSrc": "https://tse4.mm.bing.net/th/id/OIP.kEmD04QGYnrebKh7Ef2whAHaEo?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "altText": "Traditional Architecture",
+    "title": "Traditional Architecture",
+    "linkText": "Explore Dzongs",
+    "linkHref": "/destinations?category=Architecture"
+  },
+  {
+    "imageSrc": "https://tasteofbhutan.com/wp-content/uploads/2022/01/ema-datshi.jpeg",
+    "altText": "Local Cuisine",
+    "title": "Local Cuisine",
+    "linkText": "Taste Bhutan",
+    "linkHref": "/destinations?category=Culinary"
+  }
+]

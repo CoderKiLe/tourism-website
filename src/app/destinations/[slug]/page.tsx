@@ -14,12 +14,12 @@ export default function DestinationDetailPage() {
   const { slug } = useParams();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('overview');
-  
+
   // Find the destination by slug
   const destination = sampleDestinations.find(
     dest => generateSlug(dest.name) === slug
   );
-  
+
   // If destination not found, show error
   if (!destination) {
     return (
@@ -39,26 +39,26 @@ export default function DestinationDetailPage() {
       </div>
     );
   }
-  
+
   // Gallery images including the hero image
   const galleryImages = [
     destination.images.hero,
     ...destination.images.gallery
   ];
-  
+
   // Handle image navigation
   const nextImage = () => {
-    setActiveImageIndex((prev) => 
+    setActiveImageIndex((prev) =>
       prev === galleryImages.length - 1 ? 0 : prev + 1
     );
   };
-  
+
   const prevImage = () => {
-    setActiveImageIndex((prev) => 
+    setActiveImageIndex((prev) =>
       prev === 0 ? galleryImages.length - 1 : prev - 1
     );
   };
-  
+
   // Handle keyboard navigation for gallery
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -68,11 +68,11 @@ export default function DestinationDetailPage() {
         prevImage();
       }
     };
-    
+
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
-  
+
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
       {/* Breadcrumb Navigation */}
@@ -89,7 +89,7 @@ export default function DestinationDetailPage() {
           <span className="text-gray-900 font-medium">{destination.name}</span>
         </nav>
       </Container>
-      
+
       {/* Hero Section */}
       <div className="relative h-[50vh] md:h-[60vh] lg:h-[70vh] overflow-hidden">
         <AnimatePresence mode="wait">
@@ -115,7 +115,7 @@ export default function DestinationDetailPage() {
             <div className="absolute inset-0 bg-black/30" />
           </motion.div>
         </AnimatePresence>
-        
+
         {/* Gallery Navigation */}
         <div className="absolute inset-0 flex items-center justify-between px-4">
           <motion.button
@@ -128,7 +128,7 @@ export default function DestinationDetailPage() {
           >
             <ChevronLeft className="w-6 h-6" />
           </motion.button>
-          
+
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -140,7 +140,7 @@ export default function DestinationDetailPage() {
             <ChevronRight className="w-6 h-6" />
           </motion.button>
         </div>
-        
+
         {/* Hero Content */}
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 bg-gradient-to-t from-black/80 to-transparent">
           <Container>
@@ -155,18 +155,18 @@ export default function DestinationDetailPage() {
                   {destination.country}, {destination.continent}
                 </span>
               </div>
-              
+
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
                 {destination.name}
               </h1>
-              
+
               <div className="flex items-center text-white/90 mb-4">
                 <Calendar className="w-4 h-4 mr-1" />
                 <span className="text-sm md:text-base">
                   Best time to visit: {destination.bestTimeToVisit}
                 </span>
               </div>
-              
+
               <div className="flex flex-wrap gap-2">
                 {destination.categories.map((category) => (
                   <span
@@ -181,7 +181,7 @@ export default function DestinationDetailPage() {
           </Container>
         </div>
       </div>
-      
+
       {/* Thumbnail Gallery */}
       <Container className="py-4 md:py-6">
         <div className="flex overflow-x-auto space-x-2 pb-2 scrollbar-hide">
@@ -211,7 +211,7 @@ export default function DestinationDetailPage() {
           ))}
         </div>
       </Container>
-      
+
       {/* Content Tabs */}
       <Container className="py-8">
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
@@ -263,7 +263,7 @@ export default function DestinationDetailPage() {
               Location
             </button>
           </div>
-          
+
           {/* Tab Content */}
           <div className="p-6 md:p-8">
             <AnimatePresence mode="wait">
@@ -287,13 +287,13 @@ export default function DestinationDetailPage() {
                       Best Time to Visit
                     </h3>
                     <p className="text-gray-700">
-                      The best time to visit {destination.name} is during {destination.bestTimeToVisit} 
+                      The best time to visit {destination.name} is during {destination.bestTimeToVisit}
                       when the weather is most favorable and you can fully enjoy all the attractions.
                     </p>
                   </div>
                 </motion.div>
               )}
-              
+
               {activeTab === 'highlights' && (
                 <motion.div
                   key="highlights"
@@ -331,7 +331,7 @@ export default function DestinationDetailPage() {
                   </div>
                 </motion.div>
               )}
-              
+
               {activeTab === 'location' && (
                 <motion.div
                   key="location"
@@ -366,52 +366,52 @@ export default function DestinationDetailPage() {
           </div>
         </div>
       </Container>
-      
+
       {/* Related Destinations */}
       <Container className="py-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Destinations</h2>
-        
+
         <div className="overflow-x-auto scrollbar-hide">
           <div className="flex space-x-6 pb-4">
             {getRelatedDestinations(destination, 4).map((relatedDest, index) => (
-                <motion.div
-                  key={relatedDest.id}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex-shrink-0 w-72"
+              <motion.div
+                key={relatedDest.id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="flex-shrink-0 w-72"
+              >
+                <Link
+                  href={`/destinations/${generateSlug(relatedDest.name)}`}
+                  className="block group"
                 >
-                  <Link 
-                    href={`/destinations/${generateSlug(relatedDest.name)}`}
-                    className="block group"
-                  >
-                    <div className="relative h-40 rounded-lg overflow-hidden mb-3">
-                      <Image
-                        src={relatedDest.images.thumbnail}
-                        alt={relatedDest.name}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 288px"
-                        quality={75}
-                        loading="lazy"
-                        placeholder="blur"
-                        blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNkYmVhZmUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiZmRiZmUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2EpIiBkPSJNMCAwaDQwMHYyMDBIMHoiLz48L3N2Zz4="
-                      />
-                    </div>
-                    <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                      {relatedDest.name}
-                    </h3>
-                    <div className="flex items-center text-gray-500 text-sm mt-1">
-                      <MapPin className="w-3 h-3 mr-1" />
-                      <span>{relatedDest.country}, {relatedDest.continent}</span>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
+                  <div className="relative h-40 rounded-lg overflow-hidden mb-3">
+                    <Image
+                      src={relatedDest.images.thumbnail}
+                      alt={relatedDest.name}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 288px"
+                      quality={75}
+                      loading="lazy"
+                      placeholder="blur"
+                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNkYmVhZmUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiZmRiZmUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2EpIiBkPSJNMCAwaDQwMHYyMDBIMHoiLz48L3N2Zz4="
+                    />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    {relatedDest.name}
+                  </h3>
+                  <div className="flex items-center text-gray-500 text-sm mt-1">
+                    <MapPin className="w-3 h-3 mr-1" />
+                    <span>{relatedDest.country}, {relatedDest.continent}</span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </Container>
-      
+
       {/* Back to Destinations */}
       <Container className="py-8">
         <Link href="/destinations">

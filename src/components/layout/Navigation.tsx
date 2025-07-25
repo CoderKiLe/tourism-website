@@ -24,8 +24,9 @@ const Navigation = ({ isScrolled = false, className }: NavigationProps) => {
     setIsMobileMenuOpen(false);
   };
 
+  // Dynamic text color based on scroll state for glass effect
   const textColor = isScrolled ? 'text-gray-900' : 'text-white';
-  const hoverColor = isScrolled ? 'hover:text-blue-600' : 'hover:text-blue-200';
+  const hoverColor = isScrolled ? 'hover:text-blue-600' : 'hover:text-blue-300';
 
   return (
     <Container className={cn('py-4', className)}>
@@ -40,7 +41,7 @@ const Navigation = ({ isScrolled = false, className }: NavigationProps) => {
           )}
         >
           <MapPin className="w-6 h-6" />
-          <span>Bhutan</span>
+          <span>TripToBhutan</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -95,7 +96,7 @@ const Navigation = ({ isScrolled = false, className }: NavigationProps) => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden overflow-hidden bg-white/95 backdrop-blur-md rounded-lg mt-4 shadow-lg"
+            className="md:hidden overflow-hidden bg-white/10 backdrop-blur-xl border border-white/20 rounded-lg mt-4 shadow-2xl shadow-black/10"
           >
             <div className="py-4 space-y-2">
               {NAV_LINKS.map((link, index) => (

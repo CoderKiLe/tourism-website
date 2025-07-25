@@ -62,7 +62,7 @@ const HeroSection = ({
         <div
           className="w-full h-full bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1598868659801-5a9f68d57bdc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${backgroundImage}')`
           }}
         />
       </motion.div>
@@ -96,14 +96,16 @@ const HeroSection = ({
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <Button
-              variant="primary"
-              size="lg"
-              className="group"
-            >
-              {ctaText}
-              <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </Button>
+            <a href={ctaHref}>
+              <Button
+                variant="primary"
+                size="lg"
+                className="group"
+              >
+                {ctaText}
+                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </a>
 
             <Button
               variant="outline"

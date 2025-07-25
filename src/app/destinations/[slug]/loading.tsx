@@ -20,7 +20,7 @@ export default function DestinationDetailLoading() {
           </Container>
         </div>
       </div>
-      
+
       {/* Skeleton Thumbnails */}
       <Container className="py-4 md:py-6">
         <div className="flex overflow-x-auto space-x-2 pb-2">
@@ -33,7 +33,7 @@ export default function DestinationDetailLoading() {
           ))}
         </div>
       </Container>
-      
+
       {/* Skeleton Content */}
       <Container className="py-8">
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
@@ -47,7 +47,7 @@ export default function DestinationDetailLoading() {
               />
             ))}
           </div>
-          
+
           {/* Skeleton Tab Content */}
           <div className="p-6 md:p-8">
             <div className="h-8 w-1/3 bg-gray-200 rounded-lg mb-6 animate-pulse" />
@@ -61,7 +61,7 @@ export default function DestinationDetailLoading() {
           </div>
         </div>
       </Container>
-      
+
       {/* Loading Indicator */}
       <div className="fixed bottom-8 right-8">
         <motion.div

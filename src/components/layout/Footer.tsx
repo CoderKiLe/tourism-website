@@ -16,7 +16,7 @@ const Footer = ({ className }: FooterProps) => {
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center space-x-2 text-xl font-bold mb-4">
               <MapPin className="w-6 h-6" />
-              <span>Bhutan</span>
+              <span>TripToBhutan</span>
             </Link>
             <p className="text-gray-300 mb-6 max-w-md">
               Discover the Land of the Thunder Dragon. Explore Bhutan's sacred monasteries, pristine valleys, 
@@ -68,9 +68,9 @@ const Footer = ({ className }: FooterProps) => {
           <div>
             <h3 className="font-semibold mb-4">Contact</h3>
             <div className="space-y-2 text-gray-300">
-              <p>Email: kinleypenjor313@gmail.com</p>
+              <p>Email: info@triptobhutan.com</p>
               <p>Phone: +975 17807306</p>
-              <p>Address: Thimphu; Bhutan</p>
+              <p>Address: Thimphu, Bhutan</p>
             </div>
           </div>
         </div>

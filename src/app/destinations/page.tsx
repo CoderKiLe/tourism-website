@@ -14,19 +14,19 @@ export default function DestinationsPage() {
   const [activeFilters, setActiveFilters] = useState<Partial<FilterOptions>>({});
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-  
+
   // Handle window resize for responsive behavior
   useEffect(() => {
     const checkIfDesktop = () => {
       setIsDesktop(window.innerWidth >= 1024);
     };
-    
+
     // Initial check
     checkIfDesktop();
-    
+
     // Add event listener
     window.addEventListener('resize', checkIfDesktop);
-    
+
     // Cleanup
     return () => window.removeEventListener('resize', checkIfDesktop);
   }, []);
@@ -63,11 +63,11 @@ export default function DestinationsPage() {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Explore Amazing Destinations
+            Explore Bhutan's Sacred Places
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover breathtaking locations across all seven continents. 
-            Filter by continent, category, or search to find your perfect adventure.
+            Discover the mystical kingdom of Bhutan through its most sacred and beautiful destinations.
+            Filter by your interests to find your perfect adventure.
           </p>
         </motion.div>
 
@@ -124,7 +124,7 @@ export default function DestinationsPage() {
             <div className="mb-8">
               <SearchBox
                 onSearch={handleSearch}
-                placeholder="Search destinations around the world..."
+                placeholder="Search Bhutan destinations..."
                 className="w-full max-w-lg"
               />
             </div>
@@ -139,7 +139,7 @@ export default function DestinationsPage() {
               <h2 className="text-2xl font-semibold text-gray-900">
                 {filteredDestinations.length} Destination{filteredDestinations.length !== 1 ? 's' : ''} Found
               </h2>
-              
+
               {(searchQuery || Object.keys(activeFilters).length > 0) && (
                 <button
                   onClick={() => {
@@ -174,7 +174,7 @@ export default function DestinationsPage() {
                       key={destination.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ 
+                      transition={{
                         delay: index * 0.1,
                         duration: 0.5,
                         ease: [0.0, 0.0, 0.2, 1]

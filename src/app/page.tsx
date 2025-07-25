@@ -1,73 +1,80 @@
+"use client";
 import { HeroSection, FeaturedDestinations, FadeInSection, SlideInSection, ParallaxSection } from "@/components";
-import { getFeaturedDestinations, getAllContinents } from "@/lib/data";
+import { getFeaturedDestinations } from "@/lib/data";
 import { Container } from "@/components/ui";
+import { useEffect, useState } from "react";
+
+interface Destination {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface BhutanExperience {
+  imageSrc: string;
+  altText: string;
+  title: string;
+  linkText: string;
+  linkHref: string;
+}
 
 export default function Home() {
   const featuredDestinations = getFeaturedDestinations(6);
+  const [destinations, setDestinations] = useState<Destination[]>([]);
+  const [bhutanExperiences, setBhutanExperiences] = useState<BhutanExperience[]>([]);
+
+  useEffect(() => {
+    fetch('/data/destinations.json')
+      .then(response => response.json())
+      .then(data => setDestinations(data));
+
+    fetch('/data/bhutanExperiences.json')
+      .then(response => response.json())
+      .then(data => setBhutanExperiences(data));
+  }, []);
 
   return (
     <div>
       <HeroSection
-        title="Discover the World's Most Amazing Destinations"
-        subtitle="Explore breathtaking landscapes, vibrant cultures, and unforgettable experiences across all seven continents."
-        ctaText="Start Exploring"
+        title="Discover the Land of the Thunder Dragon"
+        subtitle="Explore Bhutan's sacred monasteries, pristine valleys, and ancient fortresses. Experience the last Shangri-La on Earth."
+        ctaText="Explore Bhutan"
         ctaHref="/destinations"
+        backgroundImage="https://images.unsplash.com/photo-1598868659801-5a9f68d57bdc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       />
 
       <FeaturedDestinations 
         destinations={featuredDestinations}
-        title="Featured Global Destinations"
+        title="Explore Bhutan's Sacred Places"
       />
       
-      {/* Why Travel With Us Section */}
+      {/* Why Visit Bhutan Section with FadeInSection */}
       <section className="py-20 bg-white">
         <Container>
           <FadeInSection className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Why Travel With Wanderlust?
+              Why Visit Bhutan?
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              We curate extraordinary travel experiences that connect you with diverse cultures, 
-              breathtaking landscapes, and unforgettable adventures around the globe.
+              Experience the magic of the last Himalayan kingdom, where ancient traditions 
+              and pristine nature create an unforgettable journey.
             </p>
           </FadeInSection>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <SlideInSection direction="up" delay={0.1} className="bg-gray-50 p-8 rounded-xl shadow-sm">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">Global Diversity</h3>
-              <p className="text-gray-600 text-center">
-                Explore destinations across all seven continents, from tropical paradises to polar wilderness, ancient cities to modern marvels.
-              </p>
-            </SlideInSection>
-            
-            <SlideInSection direction="up" delay={0.2} className="bg-gray-50 p-8 rounded-xl shadow-sm">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">Cultural Immersion</h3>
-              <p className="text-gray-600 text-center">
-                Connect with local communities, traditions, and authentic experiences that go beyond typical tourist attractions.
-              </p>
-            </SlideInSection>
-            
-            <SlideInSection direction="up" delay={0.3} className="bg-gray-50 p-8 rounded-xl shadow-sm">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">Sustainable Travel</h3>
-              <p className="text-gray-600 text-center">
-                Travel with purpose through our commitment to environmental conservation, cultural preservation, and supporting local economies.
-              </p>
-            </SlideInSection>
+            {destinations.map((destination, index) => (
+              <SlideInSection key={index} direction="up" delay={0.1 * (index + 1)} className="bg-gray-50 p-8 rounded-xl shadow-sm">
+                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={destination.icon} />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">{destination.title}</h3>
+                <p className="text-gray-600 text-center">
+                  {destination.description}
+                </p>
+              </SlideInSection>
+            ))}
           </div>
         </Container>
       </section>
@@ -90,133 +97,45 @@ export default function Home() {
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
             </svg>
             <p className="text-2xl md:text-3xl lg:text-4xl font-light italic mb-8">
-              "The world is a book and those who do not travel read only one page."
+              "Bhutan is the only country in the world that measures progress not by gross domestic product, but by gross national happiness."
             </p>
-            <p className="text-lg font-medium">— Saint Augustine</p>
+            <p className="text-lg font-medium">— His Majesty Jigme Khesar Namgyel Wangchuck</p>
           </FadeInSection>
         </Container>
       </ParallaxSection>
       
-      {/* Explore By Continent Section */}
+      {/* Bhutan Experiences Section */}
       <section className="py-20 bg-white">
         <Container>
           <FadeInSection className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Explore By Continent
+              Bhutan Experiences
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Discover unique experiences and breathtaking destinations across all seven continents.
+              Discover the unique cultural and natural wonders that make Bhutan a truly special destination.
             </p>
           </FadeInSection>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <SlideInSection direction="up" delay={0.1} className="relative rounded-xl overflow-hidden group h-64">
-              <img 
-                src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="Asia" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">Asia</h3>
-                <a href="/destinations?continent=Asia" className="text-blue-300 flex items-center">
-                  Explore Destinations
-                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </SlideInSection>
-            
-            <SlideInSection direction="up" delay={0.2} className="relative rounded-xl overflow-hidden group h-64">
-              <img 
-                src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="Africa" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">Africa</h3>
-                <a href="/destinations?continent=Africa" className="text-blue-300 flex items-center">
-                  Explore Destinations
-                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </SlideInSection>
-            
-            <SlideInSection direction="up" delay={0.3} className="relative rounded-xl overflow-hidden group h-64">
-              <img 
-                src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="Europe" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">Europe</h3>
-                <a href="/destinations?continent=Europe" className="text-blue-300 flex items-center">
-                  Explore Destinations
-                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </SlideInSection>
-            
-            <SlideInSection direction="up" delay={0.4} className="relative rounded-xl overflow-hidden group h-64">
-              <img 
-                src="https://images.unsplash.com/photo-1504730655501-e8638e63a831?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="North America" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">North America</h3>
-                <a href="/destinations?continent=North America" className="text-blue-300 flex items-center">
-                  Explore Destinations
-                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </SlideInSection>
-            
-            <SlideInSection direction="up" delay={0.5} className="relative rounded-xl overflow-hidden group h-64">
-              <img 
-                src="https://images.unsplash.com/photo-1526392060635-9d6019884377?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="South America" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">South America</h3>
-                <a href="/destinations?continent=South America" className="text-blue-300 flex items-center">
-                  Explore Destinations
-                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </SlideInSection>
-            
-            <SlideInSection direction="up" delay={0.6} className="relative rounded-xl overflow-hidden group h-64">
-              <img 
-                src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="Oceania" 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">Oceania</h3>
-                <a href="/destinations?continent=Oceania" className="text-blue-300 flex items-center">
-                  Explore Destinations
-                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </SlideInSection>
+            {bhutanExperiences.map((experience, index) => (
+              <SlideInSection key={index} direction="up" delay={0.1 * (index + 1)} className="relative rounded-xl overflow-hidden group h-64">
+                <img 
+                  src={experience.imageSrc}
+                  alt={experience.altText}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">{experience.title}</h3>
+                  <a href={experience.linkHref} className="text-blue-300 flex items-center">
+                    {experience.linkText}
+                    <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </SlideInSection>
+            ))}
           </div>
         </Container>
       </section>
@@ -228,17 +147,17 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="p-8 md:p-12">
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                  Ready for Your Next Adventure?
+                  Ready to Experience Bhutan?
                 </h2>
                 <p className="text-gray-600 mb-8">
-                  Start planning your journey to extraordinary destinations around the world. 
-                  Discover breathtaking landscapes, vibrant cultures, and unforgettable experiences.
+                  Start planning your journey to the Land of the Thunder Dragon today. 
+                  Discover sacred temples, breathtaking landscapes, and a culture unlike any other.
                 </p>
                 <a 
                   href="/destinations" 
                   className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Explore All Destinations
+                  Explore Destinations
                   <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -246,8 +165,8 @@ export default function Home() {
               </div>
               <div className="relative h-64 md:h-auto">
                 <img 
-                  src="https://images.unsplash.com/photo-1551466629-dd0d9e243ee3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                  alt="Antarctic Peninsula" 
+                  src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                  alt="Tiger's Nest Monastery" 
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
